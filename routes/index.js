@@ -186,6 +186,7 @@ function initRoutes(app) {
     });
   });//api/location
 
+/*
   app.get("/api/location", function(req, res){
     let id = req.query.id;
     let sql = `select * from location`;
@@ -302,6 +303,7 @@ function initRoutes(app) {
       res.send(rows);
     });
   });//api/recovery
+*/
 
   function createIncident(username, password, first, last, email) {
     let sql = 'UPDATE Users set nameFirst = ?, nameLast = ?, userEmail = ? where username = ?';
