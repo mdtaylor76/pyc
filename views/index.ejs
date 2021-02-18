@@ -1,0 +1,30 @@
+<%- include('partials/header.ejs') %>
+        <main>
+            <h1> Login Page </h1>
+        </main>
+
+    <div class="tab-content">
+        <div class="active" id="signup">   
+
+        <div class="active" id="login">  
+            <h1>Welcome Back!</h1>
+            
+            <form method="POST">
+                <% if (typeof loginError != "undefined" && loginError) { %>
+                
+                    <h3 class="error">Wrong Credentials</h3>
+                
+                <% }%>
+                <p>
+                    <label for="username"> Username </label>
+                    <input type="text" name="username"/>
+                    <label for="password"> Password </label>
+                    <input type="password" name="password"/>
+                </p>
+                <button class="button button-block" id="login"/>Login</button>
+                <input type="hidden" name="action" value="login">
+            </form>
+        </div>
+    </div>
+    
+<%- include('partials/footer.ejs') %>

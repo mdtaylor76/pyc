@@ -1,0 +1,162 @@
+<%- include('partials/header.ejs') %>
+        <main>
+            <h1> Incidents </h1>
+
+            <select id="incidentType" name="incidentType">
+                <option value="Select Incident Type"> Select Incident Type </option>
+                <option value="behavior"> Behavior </option>
+                <option value="injury"> Injury </option>
+            </select>
+            
+            <div id="incident">
+                <form method="POST">
+                    
+                	<div id="generalData">
+                        <h3> General Data </h3>
+                    	<div>
+                    		<label for="email">Email:</label>
+                    		<input type="email" id="email" name="email" value="" />
+                    	</div>
+                    	<div>
+                    	    Select Student 
+                            <select id="student" name="student">
+                                <option value="Select Child Name"> Select Child Name </option>
+                            </select>
+                    	</div>
+                    	<div>
+                    		<label for="date">Date:</label>
+                    		<input type="date" id="date" name="date" value="" />
+                    	</div>
+                    	<div>
+                    		<label for="time">Time:</label>
+                    		<input type="time" id="time" name="time" value="" />
+                    	</div>
+                    	<div>
+                    		<label for="sname">Staff Name:</label>
+                    		<input type="text" id="sname" name="sname" value="" />
+                    	</div>
+                    	
+                    	<div>
+                    	    Incident Location 
+                            <select id="location" name="location">
+                                <option value="Select Location"> Select Location </option>
+                            </select>
+                    	</div>
+                    	<div>
+                    	    Select Number of Childres 
+                            <select id="nchildren" name="nchildren">
+                                <option value="Select Child Name"> Select Child Name </option>
+                                <option value="0-10"> 0-10 </option>
+                                <option value="10-20"> 10-20 </option>
+                                <option value="20-30"> 20-30 </option>
+                                <option value="30+"> 30+ </option>
+                            </select>
+                    	</div>
+                    	<div>
+                    	    Select Number of Adults 
+                            <select id="nadults" name="nadults">
+                                <option value="Select Number of Adults"> Select Number of Adults </option>
+                                <option value="0"> 0 </option>
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>
+                                <option value="4"> 4 </option>
+                                <option value="5"> 5 </option>
+                                <option value="6+"> 6+ </option>                                
+                            </select>                    	    
+                    	</div>
+                    </div>
+                    
+                    <div id="injuryData">
+                        <h3> Injury Data </h3>
+                    	<div>
+                    	    Part of Body 
+                            <select id="bodypart" name="bodypart">
+                                <option value="Select Part of Body"> Select Body Part </option>
+                            </select>
+                    	</div>
+                    	<div>
+                    		<label for="injurydesc">Injury Description:</label>
+                    		<input type="text" id="injurydesc" name="injurydesc" value="" />
+                    	</div>
+                    	<div>
+                    		<label for="injurycause">How did Injury Occur?:</label>
+                    		<input type="text" id="injurycause" name="injurycause" value="" />
+                    	</div>  
+                    	<div>
+                    		<label for="injurytreatment">Injury Treatment:</label>
+                    		<input type="text" id="injurytreatment" name="injurytreatment" value="" />
+                    	</div> 
+                    </div>
+                    
+                    <div id="behaviorData">
+                        <h3> Behavior Data </h3>
+                    	<div>
+                    	    At-Risk Behavior 
+                            <select id="behavior" name="behavior">
+                                <option value="behavior"> At-risk Behavior </option>
+                            </select>
+                    	</div> 
+                    	<div>
+                    		<label for="behavioraction">Behavior (Action Observed):</label>
+                    		<input type="text" id="behavioraction" name="behavioraction" value="" />
+                    	</div>   
+                    	<div>
+                    	    Potential Triggers
+                    	    <div id="trigger">
+                            </div>
+                    	</div> 
+                    	<div>
+                    	    Support that Works
+                    	    <div id="supportWorks">
+                            </div>
+                            
+                    		<label for="support">Support that Works:</label>
+                    		<input type="text" id="support" name="support" value="" />
+                    	</div> 
+                    	<div>
+                    	    Recovery Options 
+                            <select id="recovery" name="recovery">
+                                <option value="recovery"> Recovery </option>
+                            </select>
+                    	</div>  
+                    	<div>
+                    	    Support Plan
+                    	    <div id="plan">
+                            </div>
+                    	</div> 
+                    	<div>
+                    	    Next Steps
+                    	    <div id="next">
+                            </div>                    	    
+                    	</div> 
+                    	<div>
+                    		<label for="incidentdesc">Incident Description:</label>
+                    		<input type="text" id="incidentdesc" name="incidentdesc" value="" />
+                    	</div>  
+                    </div>
+                    
+                    <div id="reviewData">
+                        <h3> Review Data </h3>
+                    	<div>
+                    		<label for="manager">Manager:</label>
+                    		<input type="text" id="manager" name="manager" value="" />
+                    	</div> 
+                    	<div>
+                    		<label for="parentguardian">Parent/Guardian:</label>
+                    		<input type="text" id="parentguardian" name="parentguardian" value="" />
+                    	</div> 
+                    	<div>
+                    		<label for="feedback">Feedback:</label>
+                    		<input type="text" id="feedback" name="feedback" value="" />
+                    	</div>  
+                	</div>
+                	<div>
+                		<button type="submit">Create Incident</button>
+                	</div>
+                </form> 
+            </div>
+            
+        </main>
+        <script src="js/incident.js"></script>
+<%- include('partials/footer.ejs') %>
