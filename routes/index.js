@@ -1,5 +1,7 @@
 const initViews = require('./views');
-const { pool } = require('../data-sources/connections');
+//const { pool } = require('../data-sources/connections');
+//const pool = require('dbpool');
+const pool = require("../dbPool.js").pool;
 const bcrypt = require('bcrypt');
 
 function initRoutes(app) {
@@ -123,7 +125,8 @@ function initRoutes(app) {
     });
   }
 
-  app.get('/welcome', isAuthenticated, function (req, res) {
+//  app.get('/welcome', isAuthenticated, function (req, res) {
+    app.get('/welcome', function (req, res) {
     console.log('/myAccount req.session.id: ' + req.session.id);
     let username = req.session.username;
     let userid = req.session.userid;
@@ -147,7 +150,8 @@ function initRoutes(app) {
     res.render('student', { active: 'home', 'logged': true, 'username': username, 'userid': userid });
   });
 
-  app.get('/incidents', isAuthenticated, function (req, res) {
+//  app.get('/incidents', isAuthenticated, function (req, res) {
+    app.get('/incidents', function (req, res) {
     console.log('/myAccount req.session.id: ' + req.session.id);
     let username = req.session.username;
     let userid = req.session.userid;
@@ -167,6 +171,20 @@ function initRoutes(app) {
     
     res.render('incidents', { active: 'home', 'logged': true, 'username': username, 'userid': userid });
   });
+  
+
+  app.get("/api/data", function(req, res){
+    let section = req.query.section;
+    let sql = `select * from ${section}`;
+
+    console.log(sql);
+    
+    pool.query(sql, function (err, rows, fields) {
+      if (err) throw err;
+      //console.log("rows" + rows);
+      res.send(rows);
+    });
+  });//api/location
 
   app.get("/api/location", function(req, res){
     let id = req.query.id;
@@ -246,7 +264,7 @@ function initRoutes(app) {
     });
   });//api/recovery
 
-  app.get("/api/plan", function(req, res){
+  app.get("/api/supportplan", function(req, res){
     let id = req.query.id;
     let sql = `select * from supportplan`;
 
@@ -259,7 +277,7 @@ function initRoutes(app) {
     });
   });//api/recovery
   
-  app.get("/api/next", function(req, res){
+  app.get("/api/nextsteps", function(req, res){
     let id = req.query.id;
     let sql = `select * from nextsteps`;
 
@@ -272,7 +290,7 @@ function initRoutes(app) {
     });
   });//api/recovery
   
-  app.get("/api/trigger", function(req, res){
+  app.get("/api/possibletrigger", function(req, res){
     let id = req.query.id;
     let sql = `select * from possibletrigger`;
 

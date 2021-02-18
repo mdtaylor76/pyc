@@ -1,21 +1,74 @@
 /* global $ */
 $(document).ready(function() {
     
-    locationData();
-    bodypartData();
-    behaviorData();
-    recoveryData();
-    studentData();
+    //locationData();
+    //bodypartData();
+    //behaviorData();
+    //recoveryData();
+    //studentData();
+    populate();
     supportData();
-    triggerData();
-    nextData();
-    planData();
+    //triggerData();
+    //nextData();
+    //planData();
     
     $('#incidentType').on("change", function() {
         let type = $('#incidentType').val();
         
     });
     
+    
+    async function populate() {
+        let sections = ["location", "bodypart", "behavior", "recovery", "student", "possibletrigger", "nextsteps", "supportplan"];
+        
+        sections.forEach( function(i) {
+            console.log(i);
+            getData(i);
+        });
+    }
+    
+    async function getData(section) {
+
+        let url = `/api/data?section=${section}`;
+        console.log(url);
+        
+        let response = await fetch(url);
+        let data = await response.json();
+        
+        data.forEach( function(i) {
+            //console.log(i);
+            //console.log(`<option value="${i.id}"> ${i.description} </option>`);
+            switch (section) {
+                case 'student':
+                    console.log("Student Section");
+                    $("#student").append(`<option value="${i.studentID}"> ${i.first} ${i.last} </option>`);
+                    break;
+                case 'location':
+                case 'bodypart':
+                case 'behavior':
+                case 'recovery':
+                    $(`#${section}`).append(`<option value="${i.id}"> ${i.description} </option>`);
+                    break;
+                case 'support':
+                case 'supportplan':
+                case 'nextsteps':
+                case 'possibletrigger':
+                    $(`#${section}`).append(`<input type="checkbox" name="${section}[]" value="${i.id}"> <label for=#${section}> ${i.description} </label>`);
+                    break;
+                    
+            }
+/*
+            if (section == 'student') {
+                $("#student").append(`<option value="${i.studentID}"> ${i.first} ${i.last} </option>`);
+            }
+            else {
+                $(`#${section}`).append(`<option value="${i.id}"> ${i.description} </option>`);
+            }
+*/
+        });
+    }
+
+/*    
     async function locationData() {
 
         let url = `/api/location`;
@@ -67,7 +120,7 @@ $(document).ready(function() {
             $("#recovery").append(`<option value="${i.id}"> ${i.description} </option>`);
         });
     }
-    
+
     async function studentData() {
 
         let url = `/api/student`;
@@ -80,7 +133,7 @@ $(document).ready(function() {
             $("#student").append(`<option value="${i.studentID}"> ${i.first} ${i.last} </option>`);
         });
     }
-    
+*/    
     async function supportData() {
 
         let url = `/api/support`;
@@ -96,7 +149,7 @@ $(document).ready(function() {
     
     async function planData() {
 
-        let url = `/api/plan`;
+        let url = `/api/supportplan`;
         let response = await fetch(url);
         let data = await response.json();
           
@@ -109,20 +162,20 @@ $(document).ready(function() {
 
     async function nextData() {
 
-        let url = `/api/next`;
+        let url = `/api/nextsteps`;
         let response = await fetch(url);
         let data = await response.json();
           
         data.forEach( function(i) {
             console.log(i.description);
             console.log(`<input type="checkbox" name="next[]" value="${i.id}"> <label for=#support"> ${i.description} </label>`);
-            $("#next").append(`<input type="checkbox" name="next[]" value="${i.id}"> <label for=#next"> ${i.description} </label>`);
+            $("#nextsteps").append(`<input type="checkbox" name="next[]" value="${i.id}"> <label for=#next"> ${i.description} </label>`);
         });
     }
 
     async function triggerData() {
 
-        let url = `/api/trigger`;
+        let url = `/api/possibletrigger`;
         let response = await fetch(url);
         let data = await response.json();
           
